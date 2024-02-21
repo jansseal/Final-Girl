@@ -1,4 +1,3 @@
-// inside ChapterX component keep track of current position within the chapter
 import React from 'react';
 import { useState } from 'react';
 import prompts01image from './prompts0image.jpeg';

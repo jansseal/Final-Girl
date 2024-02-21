@@ -1,8 +1,6 @@
-// this function should be used to call api endpoint, which in turn saves to the db
-
 function createUser(username, password) {
-    // Send a POST request with username and password data to the API endpoint
-    return fetch('http://localhost:3001/api/create-user', {
+
+    return fetch('/api/create-user', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

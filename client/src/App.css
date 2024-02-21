@@ -31,7 +31,7 @@
 }
 
 .App-header button {
-  margin-right: 20px; /* Adjust margin for spacing */
+  margin-right: 20px;
 }
 
 .App-link {
@@ -63,7 +63,6 @@
 }
 
 .Chapter {
-  /* Add any other styles you want for the component */
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
@@ -87,8 +86,8 @@
 }
 
 .logo {
-  width: 80%; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
+  width: 80%; 
+  height: auto; 
 }
 
 .button-container {
@@ -103,8 +102,8 @@ button, .login-button,
   font-size: 20px;
   border: none;
   border-radius: 5px;
-  background-color: #C80700; /* Adjust color as needed */
-  color: #fff; /* Adjust text color as needed */
+  background-color: #C80700;
+  color: #fff; 
   cursor: pointer;
   transition: background-color 0.3s;
 }

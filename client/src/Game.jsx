@@ -1,4 +1,3 @@
-// state needed for current chapter, display "ChapterX" component based off state
 import React from 'react';
 import { useState } from 'react';
 import Chapter1 from './Chapter1';
