@@ -17,7 +17,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/play" element={<Game />} />
+          <Route path="/play/:username" element={<Game />} />
         </Routes>
       </Router>
     </div>

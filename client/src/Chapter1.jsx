@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom'
+import { updateChoiceHistory } from './choiceModel';
 import prompts01image from './prompts0image.jpeg';
 
 const prompts = [
@@ -94,11 +96,15 @@ const backgroundImages = [
 ]
 
 function Chapter1() {
+    const { username } = useParams();
     const [currentPrompt, setCurrentPrompt] = useState(0);
     const [chosenWeapon, setChosenWeapon] = useState(null);
     const promptData = prompts[currentPrompt];
 
     const handleChoice = (choiceId) => {
+        const choiceText = promptData.choices.find(choice => choice.id === choiceId).text;
+        updateChoiceHistory(username, choiceId, promptData.prompt, choiceText);
+
         let nextPromptIndex;
         
         if (currentPrompt === 0) {

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { createUser } from './userModel';
+import { createChoiceHistory } from './choiceModel';
+
 
 function CreateAccount() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault(); 
@@ -14,12 +18,8 @@ function CreateAccount() {
         }
 
         try {
-            await createUser(username, password);
-
-            setUsername('');
-            setPassword('');
-
-            alert('Account created successfully!');
+            await Promise.all([createUser(username, password), createChoiceHistory(username)]);
+            navigate(`/play/${username}`);
         } catch (error) {
             console.error('Error creating account:', error);
             alert('Error creating account. Please try again.');

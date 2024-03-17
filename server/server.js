@@ -23,8 +23,9 @@ app.post('/api/create-user', (req, res) => {
       console.error('Error hashing password:', err);
       return res.status(500).json({ error: 'Internal server error' });
     }
-    const query = 'INSERT INTO users (username, password) VALUES (?, ?)';
-    connection.query(query, [username, hashedPassword], (error, results) => {
+    const query = 'INSERT INTO users (username, password, current_chapter) VALUES (?, ?, ?)';
+    const initialChapter = 1;
+    connection.query(query, [username, hashedPassword, initialChapter], (error, results) => {
       if (error) {
         console.error('Error creating user:', error);
         res.status(500).json({ error: 'Error creating user' });
