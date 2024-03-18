@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { createUser } from './userModel';
 import { createChoiceHistory } from './choiceModel';
 
@@ -48,7 +48,13 @@ function CreateAccount() {
                         onChange={(e) => setPassword(e.target.value)} 
                     />
                 </div>
+                <br/>
                 <button type="submit">Create Account</button>
+                <div className='flex'>
+                    <p>Already have an account?</p>
+                    <Link to="/login">Login</Link>
+                </div>
+
             </form>
         </div>
     );

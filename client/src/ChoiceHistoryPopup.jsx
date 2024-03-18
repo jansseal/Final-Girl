@@ -7,12 +7,15 @@ function ChoiceHistoryPopup({ username, onClose }) {
     useEffect(() => {
         // Fetch choice history when the component mounts
         getChoiceHistory(username)
-            .then(history => setChoiceHistory(history))
+            .then(response => {
+                const history = response.data;
+                setChoiceHistory(history);
+            })
             .catch(error => console.error('Error fetching choice history:', error));
     }, [username]);
 
     return (
-        <div className="popup">
+        <div className="popup choice-history-popup">
             <div className="popup-inner">
                 <table>
                     <thead>

@@ -1,3 +1,8 @@
+:root {
+  --text-size: 22px;
+  --subtext-size: 20px;
+}
+
 .App {
   background-color: black;
   text-align: center;
@@ -44,14 +49,14 @@
   width: 20%;
 }
 
-.Game, .Home, .CreateAccount {
+.Game, .Home, .CreateAccount, .Login {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 95vh;
   color: #fff;
-  font-size: 22px;
+  font-size: var(--text-size);
 }
 
 .Home {
@@ -81,6 +86,40 @@
   border-radius: 5px;
 }
 
+.popup {
+  position: fixed;
+  max-width: 80vw;
+  max-height: 70vh;
+  overflow-y: auto;
+  color: black;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+}
+
+.settings-popup {
+  position: fixed;
+  top: 35vh;
+  left: 40vw;
+  color: black;
+  display: flex;
+}
+
+.popup-inner {
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex p {
+  margin-right: 10px;
+}
+
 .logo-container {
   margin-bottom: 20px;
 }
@@ -95,11 +134,11 @@
   flex-direction: row;
 }
 
-button, .login-button,
+button, .login-button, .logout-button,
 .create-account-button {
   padding: 10px 20px;
   margin: 10px;
-  font-size: 20px;
+  font-size: var(--subtext-size);
   border: none;
   border-radius: 5px;
   background-color: #C80700;
@@ -117,18 +156,18 @@ button:hover, .login-button:hover,
 table {
   border-collapse: collapse;
   width: 100%;
-  border: 2px solid white; 
+  border: 2px solid black; 
 }
 
 th {
-  border: 2px solid white; 
+  border: 2px solid black; 
   padding: 8px;
   text-align: center;
   background-color: red;
 }
 
 td {
-  border: 1px solid white;
+  border: 1px solid black;
   padding: 8px;
 }
 

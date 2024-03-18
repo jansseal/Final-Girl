@@ -1,8 +1,12 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 import { updateChoiceHistory } from './choiceModel';
+import { updateCurrentPrompt, updateChapter } from './userModel';
 import prompts01image from './prompts0image.jpeg';
+import prompts02image from './prompts2image.jpeg';
+import prompts03image from './prompts5image.jpg';
+import prompts04image from './prompts6image.jpg';
 
 const prompts = [
     {
@@ -83,51 +87,77 @@ const prompts = [
         ]
     },
     {
-        prompt: ""
+        prompt: 'Afraid of setting off the men, Winona slowly nods her head yes in silence. "Good, good..." the larger one says, as she sees his eyes crinkle in delight. "I\'m so happy you chose to be honest - I think we\'ll get along just fine". Before Winona has time to form another thought, the smaller, quiet man shoots toward her with a rag in his hand.',
+        choices: [
+            { id: 1, text: "SCREAM!" }
+        ]
     },
     {
-        prompt: ""
+        prompt: '"My boyfriend\'s meeting me here - he\'ll be here soon!" Winona spits out. "So you think we\'re stupid, huh?" the larger one says as she sees him ball his fists. ',
+        choices: [
+            { id: 1, text: "SCREAM!" }
+        ]    },
+    {
+        prompt: "It's too late - the rag is already covering Winona's nose and mouth. Everything fades to black."
     }
 ];
 
 const backgroundImages = [
     prompts01image,
     prompts01image,   
+    prompts02image,
+    prompts01image,
+    prompts01image,   
+    prompts03image,
+    prompts04image,
+   
 ]
 
-function Chapter1() {
-    const { username } = useParams();
-    const [currentPrompt, setCurrentPrompt] = useState(0);
+function Chapter1({ username, currentPrompt: initialPrompt, onChapterCompletion }) {
+    // // const { username } = useParams();
+    const [currentPrompt, setCurrentPrompt] = useState(initialPrompt);
     const [chosenWeapon, setChosenWeapon] = useState(null);
     const promptData = prompts[currentPrompt];
 
     const handleChoice = (choiceId) => {
         const choiceText = promptData.choices.find(choice => choice.id === choiceId).text;
-        updateChoiceHistory(username, choiceId, promptData.prompt, choiceText);
-
-        let nextPromptIndex;
-        
-        if (currentPrompt === 0) {
-            nextPromptIndex = (choiceId === 1) ? 1 : 6;
-        } else if (currentPrompt === 1) {
-            nextPromptIndex = (choiceId === 1) ? 2 : 6;
-        } else if (currentPrompt === 2) {
-            nextPromptIndex = (choiceId === 1) ? 3 : 4;
-        } else if (currentPrompt === 3 || currentPrompt === 4) {
-            setChosenWeapon(choiceId === 1 ? 'knife' : 'stoker');
-            nextPromptIndex = 5;
-        } else if (currentPrompt === 6) {
-            nextPromptIndex = (choiceId === 1) ? 7 : 10;
-        } else if (currentPrompt === 7) {
-            nextPromptIndex = (choiceId === 1) ? 8 : 9;
-        } else if (currentPrompt === 8) {
-            nextPromptIndex = (choiceId === 1) ? 3 : 4;
-        } else if (currentPrompt === 9) {
-            nextPromptIndex = (choiceId === 1) ? 8 : 10;
-        }
-    
-        setCurrentPrompt(nextPromptIndex);
+        updateChoiceHistory(username, choiceId, promptData.prompt, choiceText)
+            .then(() => {
+                let nextPromptIndex;
+                
+                if (currentPrompt === 0) {
+                    nextPromptIndex = (choiceId === 1) ? 1 : 6;
+                } else if (currentPrompt === 1) {
+                    nextPromptIndex = (choiceId === 1) ? 2 : 6;
+                } else if (currentPrompt === 2) {
+                    nextPromptIndex = (choiceId === 1) ? 3 : 4;
+                } else if (currentPrompt === 3 || currentPrompt === 4) {
+                    setChosenWeapon(choiceId === 1 ? 'knife' : 'stoker');
+                    nextPromptIndex = 5;
+                } else if (currentPrompt === 6) {
+                    nextPromptIndex = (choiceId === 1) ? 7 : 10;
+                } else if (currentPrompt === 7) {
+                    nextPromptIndex = (choiceId === 1) ? 8 : 9;
+                } else if (currentPrompt === 8) {
+                    nextPromptIndex = (choiceId === 1) ? 3 : 4;
+                } else if (currentPrompt === 9) {
+                    nextPromptIndex = (choiceId === 1) ? 8 : 10;
+                }
+                
+                setCurrentPrompt(nextPromptIndex);
+                updateCurrentPrompt(username, nextPromptIndex)
+                    .then(() => {
+                        // Check if the chapter is completed
+                        if (nextPromptIndex === prompts.length - 1) {
+                            onChapterCompletion(); // Call onChapterCompletion if chapter is completed
+                        }
+                    })
+                    .catch(error => console.error('Error updating current prompt:', error));
+            })
+            .catch(error => console.error('Error updating choice history:', error));
     };
+    
+    
     
     return (
         <div className='Chapter' style={{ backgroundImage: `url(${backgroundImages[currentPrompt]})` }}>
