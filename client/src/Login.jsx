@@ -21,7 +21,7 @@ function Login() {
         } catch (error) {
             console.error('Error logging in:', error);
             alert('Error logging in. Please try again.');
-        }    };
+        }};
 
     return (
         <div className="Login">

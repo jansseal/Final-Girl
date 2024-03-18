@@ -19,7 +19,7 @@ function CreateAccount() {
 
         try {
             await Promise.all([createUser(username, password), createChoiceHistory(username)]);
-            navigate(`/play/${username}`);
+            navigate(`/intro/${username}`);
         } catch (error) {
             console.error('Error creating account:', error);
             alert('Error creating account. Please try again.');

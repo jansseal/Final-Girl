@@ -5,7 +5,6 @@ function ChoiceHistoryPopup({ username, onClose }) {
     const [choiceHistory, setChoiceHistory] = useState([]);
 
     useEffect(() => {
-        // Fetch choice history when the component mounts
         getChoiceHistory(username)
             .then(response => {
                 const history = response.data;

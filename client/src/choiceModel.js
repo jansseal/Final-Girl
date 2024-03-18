@@ -19,7 +19,6 @@ function createChoiceHistory(username) {
 }
 
 function updateChoiceHistory(username, choice_id, prompt, choice_text) {
-    // console.log(username + choice_id + prompt + choice_text);
     return fetch('http://localhost:3030/microservice/update/' + username, {
         method: 'POST',
         headers: {
