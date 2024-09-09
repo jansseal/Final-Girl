@@ -1,3 +1,5 @@
+**NOTE: This game is not complete - only rough gameplay through first chapter storyline is available.**
+
 Final Girl
 
 Description
